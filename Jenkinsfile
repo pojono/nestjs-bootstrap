@@ -8,6 +8,8 @@
     }
 
     stage("push") {
-      dockerImage.push()
+      docker.withRegistry('docker.io', 'DockerRegistry') {
+        dockerImage.push()
+      }
     }
   }
