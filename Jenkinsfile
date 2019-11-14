@@ -1,19 +1,20 @@
 node("master") {
 
+  environment {
+    registry = "pojono/nestjs-bootstrap"
+    dockerImage = ''
+  }
+
   stage('checkout') {
       checkout scm
   }
 
   stage("build") {
-    sh 'docker build -t nestjs-bootstrap:latest .'
-  }
-
-  stage("tag") {
-    sh 'docker tag nestjs-bootstrap:latest pojono/nestjs-bootstrap:latest'
+    dockerImage = docker.build registry + ":$BUILD_NUMBER"
   }
 
   stage("push") {
-    sh 'docker push pojono/nestjs-bootstrap:latest'
+    dockerImage.push()
   }
 
 }
