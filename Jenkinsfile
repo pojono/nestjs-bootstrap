@@ -9,7 +9,7 @@ def sendChangeLogs() {
             commitMessages = commitMessages + "\n*${entry.author}*: ${entry.msg}"
         }
     }
-    telegramSend "✅ #jenkins №${env.BUILD_NUMBER} ${env.JOB_NAME} ${env.JOB_URL} \n${commitMessages}"
+    telegramSend "✅ №${env.BUILD_NUMBER} ${env.JOB_NAME} #jenkins ${env.JOB_URL} \n${commitMessages}"
 }
 
 try {
@@ -34,6 +34,6 @@ try {
   }
 
 } catch (err) {
-  telegramSend "⚠ #jenkins №${env.BUILD_NUMBER} ${env.JOB_NAME} ${env.JOB_URL}"
+  telegramSend "⚠ №${env.BUILD_NUMBER} ${env.JOB_NAME} #jenkins ${env.JOB_URL}"
   throw err
 }
