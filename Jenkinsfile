@@ -1,13 +1,12 @@
 @NonCPS
 def sendChangeLogs() {
     def commitMessages = ""
-    def formatter = new SimpleDateFormat('yyyy-MM-dd HH:mm')
     def changeLogSets = currentBuild.changeSets
     for (int i = 0; i < changeLogSets.size(); i++) {
         def entries = changeLogSets[i].items
         for (int j = 0; j < entries.length; j++) {
             def entry = entries[j]
-            commitMessages = commitMessages + "${entry.author} ${entry.commitId}:\n${formatter.format(new Date(entry.timestamp))}: *${entry.msg}*\n"
+            commitMessages = commitMessages + "${entry.author} ${entry.commitId} ${entry.timestamp} *${entry.msg}*\n"
         }
     }
     telegramSend "✅ #jenkins ${env.JOB_NAME}: Build Success #${env.BUILD_NUMBER} ${env.JOB_URL} Changes: ${commitMessages}"
