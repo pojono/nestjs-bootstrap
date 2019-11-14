@@ -6,7 +6,7 @@ def sendChangeLogs() {
         def entries = changeLogSets[i].items
         for (int j = 0; j < entries.length; j++) {
             def entry = entries[j]
-            commitMessages = commitMessages + "${entry.author} ${entry.commitId} ${entry.timestamp} *${entry.msg}*\n"
+            commitMessages = commitMessages + "\n *${entry.author}*: ${entry.msg}"
         }
     }
     telegramSend "✅ #jenkins ${env.JOB_NAME}: Build Success #${env.BUILD_NUMBER} ${env.JOB_URL} Changes: ${commitMessages}"
