@@ -1,3 +1,4 @@
+try {
   node("master") {
     stage('checkout') {
         checkout scm
@@ -12,4 +13,13 @@
         dockerImage.push()
       }
     }
+
+    stage("telegram") {
+      telegramSend "#jenkins ${env.JOB_NAME}: Build Success #${env.BUILD_NUMBER} ${env.JOB_URL} "
+    }
   }
+
+} catch (err) {
+  telegramSend "#jenkins ${env.JOB_NAME}: Build Failed #${env.BUILD_NUMBER} ${env.JOB_URL} "
+  throw err
+}
