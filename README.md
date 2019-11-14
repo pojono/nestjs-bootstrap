@@ -7,6 +7,7 @@ nest new nestjs-bootstrap
 Jenkins Item:
 Multibranch pipeline
 Branch Sources: GitHub
+Credentials: required
 Repository URL: https://github.com/pojono/nestjs-bootstrap
 Discover branches: all branches
 Discover pull requests from origin: The current pull request revision

@@ -5,7 +5,15 @@ node("master") {
   }
 
   stage("build") {
-    sh 'docker build -t nestjs-bootstrap .'
+    sh 'docker build -t nestjs-bootstrap:latest .'
+  }
+
+  stage("tag") {
+    sh 'docker tag nestjs-bootstrap:latest pojono/nestjs-bootstrap:latest'
+  }
+
+  stage("push") {
+    sh 'docker push pojono/nestjs-bootstrap:latest'
   }
 
 }
