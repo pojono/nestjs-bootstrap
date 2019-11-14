@@ -6,10 +6,10 @@ def sendChangeLogs() {
         def entries = changeLogSets[i].items
         for (int j = 0; j < entries.length; j++) {
             def entry = entries[j]
-            commitMessages = commitMessages + "\n *${entry.author}*: ${entry.msg}"
+            commitMessages = commitMessages + "\n*${entry.author}*: ${entry.msg}"
         }
     }
-    telegramSend "✅ #jenkins ${env.JOB_NAME}: Build Success #${env.BUILD_NUMBER} ${env.JOB_URL} Changes: ${commitMessages}"
+    telegramSend "✅ #jenkins №${env.BUILD_NUMBER} ${env.JOB_NAME} ${env.JOB_URL} \n${commitMessages}"
 }
 
 try {
@@ -34,6 +34,6 @@ try {
   }
 
 } catch (err) {
-  telegramSend "⚠ #jenkins ${env.JOB_NAME}: Build Failed #${env.BUILD_NUMBER} ${env.JOB_URL} "
+  telegramSend "⚠ #jenkins №${env.BUILD_NUMBER} ${env.JOB_NAME} ${env.JOB_URL}"
   throw err
 }
