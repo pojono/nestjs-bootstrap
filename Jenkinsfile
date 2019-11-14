@@ -8,7 +8,7 @@
     }
 
     stage("push") {
-      docker.withRegistry('docker.io', 'DockerRegistry') {
+      docker.withRegistry([ credentialsId: "DockerRegistry", url: "" ]) {
         dockerImage.push()
       }
     }
